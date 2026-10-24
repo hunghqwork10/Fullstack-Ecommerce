@@ -1,4 +1,5 @@
-import { useState, type ReactNode } from 'react'
+import { useState, type ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 
 type IconName =
   | 'search'
@@ -139,19 +140,34 @@ export function HomePage() {
 
         <nav className={`main-nav ${menuOpen ? 'nav-open' : ''}`}>
           <div className="container nav-inner">
-            <button className="mobile-menu" onClick={() => setMenuOpen(!menuOpen)} aria-label="Mở danh mục">
+            {/* Nút bấm đóng/mở menu trên thiết bị di động */}
+            <button 
+              className="mobile-menu" 
+              onClick={() => setMenuOpen(!menuOpen)} 
+              aria-label={menuOpen ? "Đóng danh mục" : "Mở danh mục"}
+            >
               <Icon name="menu" />
               <span>Danh mục</span>
             </button>
+
+            {/* Khối danh sách liên kết điều hướng chính */}
             <div className="nav-links">
-              <a className="nav-link active" href="#">Trang chủ</a>
-              <a className="nav-link" href="#categories">Điện thoại</a>
-              <a className="nav-link" href="#categories">Laptop</a>
-              <a className="nav-link" href="#categories">Máy tính bảng</a>
-              <a className="nav-link" href="#categories">Phụ kiện</a>
-              <a className="nav-link" href="#products">Khuyến mãi <span className="sale-tag">HOT</span></a>
+              <Link className="nav-link active" to="/">Trang chủ</Link>
+              
+              {/* Định tuyến sẵn sàng sang các trang danh mục (sau này chỉ cần tạo route tương ứng) */}
+              <Link className="nav-link" to="/category/dien-thoai">Điện thoại</Link>
+              <Link className="nav-link" to="/category/laptop">Laptop</Link>
+              <Link className="nav-link" to="/category/may-tinh-bang">Máy tính bảng</Link>
+              <Link className="nav-link" to="/category/phu-kien">Phụ kiện</Link>
+              
+              <Link className="nav-link" to="/khuyen-mai">
+                Khuyến mãi <span className="sale-tag">HOT</span>
+              </Link>
             </div>
-            <a className="store-locator" href="#support"><span className="locator-dot" /> Hệ thống cửa hàng</a>
+
+            <a className="store-locator" href="#support">
+              <span className="locator-dot" /> Hệ thống cửa hàng
+            </a>
           </div>
         </nav>
       </header>
